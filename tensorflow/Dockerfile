@@ -9,4 +9,5 @@
 FROM tensorflow/tensorflow:1.4.0-gpu-py3
 LABEL maintainer="hamling-ling"
 
-RUN pip install seaborn
+RUN pip install seaborn keras
+
