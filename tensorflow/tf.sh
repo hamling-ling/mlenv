@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function tf() {
     docker run --runtime=nvidia \
 	   -v `realpath ~/GitHub`:/notebooks/GitHub \
@@ -5,7 +7,7 @@ function tf() {
 	   -it \
 	   -p 8888:8888 \
 	   -p 6006:6006 \
-	   tensorflow/tensorflow:1.4.0-gpu-py3 bash
+	   tensor-plus bash
 }
 
 tf
