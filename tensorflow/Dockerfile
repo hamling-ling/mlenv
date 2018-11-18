@@ -9,5 +9,9 @@
 FROM tensorflow/tensorflow:1.4.0-gpu-py3
 LABEL maintainer="hamling-ling"
 
+RUN apt-get update
+RUN apt-get install -y libsndfile1-dev
+RUN pip install --upgrade pip
 RUN pip install seaborn keras
+RUN pip install pysoundfile
 
