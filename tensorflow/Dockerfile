@@ -4,7 +4,7 @@
 # See image just created
 # > docker images
 # docker image -> docker container
-# > docker run -rm -it tensor-plus
+# > docker run --rm -it tensor-plus
 
 FROM tensorflow/tensorflow:1.4.0-gpu-py3
 LABEL maintainer="hamling-ling"
