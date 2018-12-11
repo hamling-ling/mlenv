@@ -13,6 +13,7 @@ $ sudo systemctl start nfs-kernel-server.service
 go to client machine
 
 sudo mkdir remote
+sudo chmod 777 remote
 
 Linux
 $ sudo mount -t nfs -o resvport,rw SERVER_IP:HOME CLIENT_HOME/remote
