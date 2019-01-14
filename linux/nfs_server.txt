@@ -1,9 +1,9 @@
-$ sudo apt-get install -y nfs-kernel-servers
+$ sudo apt-get install -y nfs-kernel-server
 
 $ sudo vi /etc/exports
 
 then add following where HOME is your home directory
-HOME 192.168.0.0/24(rw,sync,no_subtree_check,no_root_squash)"
+HOME 192.168.0.0/24(rw,sync,no_subtree_check,no_root_squash)
 
 $ sudo exportfs -ra
 
