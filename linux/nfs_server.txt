@@ -1,9 +1,12 @@
 $ sudo apt-get install -y nfs-kernel-server
 
+$sudo mkdir -p /var/share
+$sudo chown nobody.nogroup /var/share
+
 $ sudo vi /etc/exports
 
 then add following where HOME is your home directory
-HOME 192.168.0.0/24(rw,sync,no_subtree_check,no_root_squash)
+/var/share 192.168.0.0/24(rw,sync,no_subtree_check,no_root_squash)
 
 $ sudo exportfs -ra
 
@@ -12,12 +15,12 @@ $ sudo systemctl start nfs-kernel-server.service
 
 go to client machine
 
-sudo mkdir remote
-sudo chmod 777 remote
+sudo mkdir ~/remote
+sudo chmod 777 ~/remote
 
 Linux
-$ sudo mount -t nfs -o resvport,rw SERVER_IP:HOME CLIENT_HOME/remote
+$ sudo mount -t nfs -o resvport,rw SERVER_IP:/var/share CLIENT_HOME/remote
 
 OSX
-$ sudo mount_nfs -o resvport,rw SERVER_IP:HOME CLIENT_HOME/remote
-$ chmod 777 CLIENT_HOME/remote    # 777 should be fixed
+$ sudo mount_nfs -o resvport,rw SERVER_IP:/var/share CLIENT_HOME/remote
+
