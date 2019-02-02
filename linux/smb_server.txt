@@ -1,0 +1,48 @@
+sudo apt install samba
+sudo mkdir /var/share
+sudo chmod 777 /var/share
+
+sudo emacs /etc/samba/smb.conf
+
+add following
+---
+[global]
+unix charset = UTF-8
+dos charset = CP932
+
+#... skip ...
+interfaces = 127.0.0.0/8 10.0.0.0/24 192.168.0.0/24
+#... skip ...
+
+# 最終行に追記
+# 任意の共有名を指定
+[Share]
+
+     # 共有フォルダ指定
+     path = /var/share
+     # 書き込みOK
+     writable = yes
+     # ゲストユーザーOK
+     guest ok = yes
+     # 全てゲストとして扱う
+     guest only = yes
+     # フルアクセスでファイル作成
+     create mode = 0777
+     # フルアクセスでフォルダ作成
+     directory mode = 0777
+ 
+# how to reboot samba
+# sudo systemctl restart smbd nmbd
+---
+sudo systemctl restart smbd
+sudo systemctl enable smbd
+
+CLIENT
+for Linux
+sudo apt install cifs-utils
+mkdir $HOME/smb
+sudo mount -t cifs //ip_address/share $HOME/smb
+
+for Mac
+mkdir $HOME/smb
+mount_smbfs //ip_address/share $HOME/smb
