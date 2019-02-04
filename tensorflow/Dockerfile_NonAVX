@@ -1,6 +1,6 @@
 # How to setup
 # Build docker image
-# > docker build -t tensor-plus .
+# > docker build -f Dockerfile_NonAVX -t tensor-plus .
 # See image just created
 # > docker images
 # docker image -> docker container
