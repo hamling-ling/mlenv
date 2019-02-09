@@ -1,0 +1,31 @@
+# How to setup
+# Place tensorflow whl binary to Dockerfile directory
+# 
+# Build docker image
+# > docker build -f Dockerfile_Whl -t tensor-plus .
+# See image just created
+# > docker images
+# docker image -> docker container
+# > docker run --rm -it tensor-plus
+#
+# ref
+#   https://qiita.com/yamanaka1213/items/c32dbe262dacde97d685
+
+#FROM nvidia/cuda:10.0-cudnn7-runtime
+FROM tensorflow/tensorflow:1.12.0-gpu-py3
+LABEL maintainer="hamling-ling"
+
+RUN apt-get update
+RUN apt-get install -y libsndfile1-dev
+
+RUN pip install --upgrade pip
+
+# in my case
+RUN pip uninstall tensorflow
+ARG TFWHL="tensorflow-1.12.0rc0-cp35-cp35m-linux_x86_64.whl"
+ADD ${TFWHL} /tmp/${TFWHL}
+
+RUN pip install /tmp/${TFWHL}
+RUN pip install seaborn keras
+RUN pip install pysoundfile
+
