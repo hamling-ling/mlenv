@@ -1,6 +1,6 @@
 # How to setup
 # Build docker image
-# > docker build -f Dockerfile_cuda10 -t tensor-plus .
+# > docker build -f Dockerfile_cuda10 -t tensor-rt .
 # See image just created
 # > docker images
 # docker image -> docker container
@@ -8,15 +8,22 @@
 
 #use nvidia tensorflow until googles one supports cuda10
 #FROM tensorflow/tensorflow:nightly-gpu-py3
-FROM nvcr.io/nvidia/tensorflow:19.01-py3
+#FROM nvcr.io/nvidia/tensorflow:19.03-py3
+FROM nvcr.io/nvidia/tensorrt:19.03-py3
 
 LABEL maintainer="hamling-ling"
 
 RUN apt-get update
 RUN apt-get install -y libsndfile1-dev
 RUN pip install --upgrade pip
+RUN pip install requests
+RUN pip install matplotlib
 RUN pip install seaborn keras
 RUN pip install pysoundfile
-RUN pip install requests
+RUN pip install Pillow
+RUN pip install ipython[all]
+RUN pip install jupyter
+RUN pip install tensorflow
 
 RUN mkdir -p /notebooks
+RUN /opt/tensorrt/python/python_setup.sh
