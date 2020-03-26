@@ -1,0 +1,26 @@
+# How to setup
+# Build docker image
+# > docker build -f Dockerfile_NonAVX_Tf2 -t tensor2-plus .
+# See image just created
+# > docker images
+# docker image -> docker container
+# > docker run --rm -it tensor2-plus
+
+FROM tensorflow/tensorflow:2.2.0rc1-gpu-py3-jupyter
+LABEL maintainer="hamling-ling"
+
+RUN apt-get update
+RUN apt-get install -y libsndfile1-dev
+
+RUN pip install --upgrade pip
+
+# in my case
+RUN pip uninstall tensorflow
+ARG TFWHL="tensorflow-2.2.0rc1-cp36-cp36m-linux_x86_64.whl"
+ADD ${TFWHL} /tmp/${TFWHL}
+
+RUN pip install /tmp/${TFWHL}
+RUN pip install seaborn
+RUN pip install pysoundfile
+RUN pip install pillow
+
