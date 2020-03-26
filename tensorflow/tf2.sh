@@ -18,7 +18,7 @@ function tf() {
 	   -it \
 	   -p 8888:8888 \
 	   -p 6006:6006 \
-	   tensor-plus bash
+	   tensor2-plus bash
 }
 
 tf
