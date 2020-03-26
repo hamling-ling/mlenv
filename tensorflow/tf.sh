@@ -9,7 +9,6 @@ fi
 
 function tf() {
     docker run --runtime=nvidia \
-	   -v `realpath ~/GitHub`:/notebooks/GitHub \
            -v /etc/group:/etc/group:ro \
 	   -v /etc/passwd:/etc/passwd:ro \
 	   -v $HOME/GitHub:$HOME/GitHub -e "HOME=$HOME" -e "GRANT_SUDO=yes"\
