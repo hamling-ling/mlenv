@@ -12,7 +12,7 @@ function tf() {
 	   -v `realpath ~/GitHub`:/notebooks/GitHub \
            -v /etc/group:/etc/group:ro \
 	   -v /etc/passwd:/etc/passwd:ro \
-	    -v $HOME/GitHub:$HOME/GitHub -e "HOME=$HOME" \
+	   -v $HOME/GitHub:$HOME/GitHub -e "HOME=$HOME" -e "GRANT_SUDO=yes"\
 	   $USER_OPT $USER_PARAM \
 	   --rm \
 	   -it \
