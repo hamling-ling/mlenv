@@ -2,7 +2,7 @@
 # Place tensorflow whl binary to Dockerfile directory
 # 
 # Build docker image
-# > docker build -f Dockerfile_Whl -t tensor-plus .
+# > docker build -f Dockerfile_NonAVX_Tf1 -t tensor-plus .
 # See image just created
 # > docker images
 # docker image -> docker container
@@ -12,7 +12,8 @@
 #   https://qiita.com/yamanaka1213/items/c32dbe262dacde97d685
 
 #FROM nvidia/cuda:10.0-cudnn7-runtime
-FROM tensorflow/tensorflow:1.13.1-gpu-py3-jupyter
+FROM tensorflow/tensorflow:1.15.2-gpu-py3-jupyter
+#FROM tensorflow/tensorflow:latest-gpu-py3-jupyter
 LABEL maintainer="hamling-ling"
 
 RUN apt-get update
@@ -22,10 +23,11 @@ RUN pip install --upgrade pip
 
 # in my case
 RUN pip uninstall tensorflow
-ARG TFWHL="tensorflow-1.13.1-cp35-cp35m-linux_x86_64.whl"
+ARG TFWHL="tensorflow-1.15.2-cp36-cp36m-linux_x86_64.whl"
 ADD ${TFWHL} /tmp/${TFWHL}
 
 RUN pip install /tmp/${TFWHL}
 RUN pip install seaborn keras
 RUN pip install pysoundfile
+RUN pip install pillow
 
