@@ -2,7 +2,7 @@
 # Place tensorflow whl binary to Dockerfile directory
 # 
 # Build docker image
-# > docker build -f Dockerfile_NonAVX_Tf1 --build-arg user=<YOUR NAME> --build-arg pass=<YOUR PASSWD> -t tensor-plus .
+# > docker build -f Dockerfile_NonAVX_Tf1 --build-arg user=$USER --build-arg pass=<YOUR PASSWD> -t tensor-plus .
 # See image just created
 # > docker images
 # docker image -> docker container
@@ -34,7 +34,6 @@ RUN pip install pysoundfile
 RUN pip install pillow
 
 # User
-
 RUN echo ${user}
 RUN groupadd --gid 1000 ${user}
 RUN useradd -u 1000 -g 1000 -G sudo -s /bin/bash -d /home/${user} -m ${user}
