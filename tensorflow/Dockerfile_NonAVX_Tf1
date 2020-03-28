@@ -11,7 +11,12 @@
 # ref
 #   https://qiita.com/yamanaka1213/items/c32dbe262dacde97d685
 
-FROM tensorflow/tensorflow:1.15.2-gpu-py3-jupyter
+# I built my tf with new version of latest-devel-gpu-py3 which uses cuda 10.1
+# so I have to use something with the cuda 10.1 version of container
+# other than this one
+# FROM tensorflow/tensorflow:1.15.2-gpu-py3-jupyter
+# the one I use is latest-gpu-py3 on 2020/3/28
+FROM tensorflow/tensorflow@sha256:901b827b19d14aa0dd79ebbd45f410ee9dbfa209f6a4db71041b5b8ae144fea5
 ARG user="tfadmin"
 ARG pass="tfadmin"
 LABEL maintainer="hamling-ling"
@@ -24,7 +29,8 @@ RUN apt-get install -y sudo
 RUN pip install --upgrade pip
 
 # in my case
-RUN pip uninstall tensorflow
+RUN pip uninstall -y tensorflow
+RUN pip uninstall -y tensorflow-gpu
 ARG TFWHL="tensorflow-1.15.2-cp36-cp36m-linux_x86_64.whl"
 ADD ${TFWHL} /tmp/${TFWHL}
 
