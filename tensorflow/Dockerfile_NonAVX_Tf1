@@ -26,7 +26,14 @@ RUN apt-get update && apt-get install -y \
     git \
     sudo \
     libsm6 \
-    libxrender-dev
+    libxrender-dev \
+    curl
+
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
+RUN apt-get update
+RUN apt-get install -y edgetpu-compiler
+
 
 RUN pip install --upgrade pip
 
