@@ -6,7 +6,7 @@
 # docker image -> docker container
 # > docker run --rm -it tensor-plus
 
-FROM tensorflow/tensorflow:1.13.1-gpu-py3-jupyter
+FROM tensorflow/tensorflow:1.15.5-gpu-py3-jupyter
 LABEL maintainer="hamling-ling"
 
 RUN apt-get update

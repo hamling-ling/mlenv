@@ -23,7 +23,7 @@ RUN pip install pysoundfile
 RUN pip install Pillow
 RUN pip install ipython[all]
 RUN pip install jupyter
-RUN pip install tensorflow
+RUN pip install tensorflow==1.15
 
 RUN mkdir -p /notebooks
 RUN /opt/tensorrt/python/python_setup.sh
