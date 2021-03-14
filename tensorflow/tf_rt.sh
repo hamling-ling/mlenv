@@ -15,7 +15,7 @@ fi
 
 function tfrt() {
     nvidia-docker run \
-	   -v `realpath ~/GitHub`:/notebooks/GitHub \
+	   -v `realpath ~/Github`:/notebooks/Github \
 	   -v /etc/group:/etc/group:ro \
 	   -v /etc/passwd:/etc/passwd:ro \
 	   -v $HOME:$HOME -e "HOME=$HOME" \
