@@ -9,9 +9,9 @@ fi
 
 # https://docs.nvidia.com/deeplearning/sdk/tensorrt-container-release-notes/running.html
 # do following once
-#docker pull nvcr.io/nvidia/tensorflow:19.03-py3
+#docker pull nvcr.io/nvidia/tensorflow:20.06-py3
 # then
-#nvidia-docker run -it --rm nvcr.io/nvidia/tensorrt:19.03-py3
+#nvidia-docker run -it --rm nvcr.io/nvidia/tensorrt:20.06-py3
 
 function tfrt() {
     nvidia-docker run \
