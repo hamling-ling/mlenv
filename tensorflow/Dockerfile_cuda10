@@ -15,7 +15,7 @@
 # docker image -> docker container
 # > docker run --rm -it tensor-rt
 
-FROM nvcr.io/nvidia/tensorrt:20.03-py3
+FROM nvcr.io/nvidia/tensorrt:20.09-py3
 ARG user="tfadmin"
 ARG pass="tfadmin"
 ARG user_id=1000
