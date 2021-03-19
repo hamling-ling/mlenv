@@ -1,26 +1,42 @@
 # How to setup
+#
 # Build docker image
-# > docker build -f Dockerfile_AVX --build-arg user=$USER --build-arg pass=<YOUR PASSWD> -t tensor-plus .
+# > docker build -f Dockerfile_AVX \
+#	--build-arg user=$(id -un) \
+#	--build-arg user_id="$(id -u)" \
+#   --build-arg user_grp="$(id -gn)" \
+#	--build-arg user_gid="$(id -g)" \
+#	--build-arg pass=<YOUR PASSWORD> \
+#	-t tensor-plus .
+#
 # See image just created
 # > docker images
-# docker image -> docker container
+#
+# Run container
 # > docker run --rm -it tensor-plus
 
 FROM tensorflow/tensorflow:1.15.5-gpu-py3-jupyter
 ARG user="tfadmin"
 ARG pass="tfadmin"
+ARG user_id=1000
+ARG user_grp="tfadmin"
+ARG user_gid=1000
+
 LABEL maintainer="hamling-ling"
 
-RUN apt-get update
-RUN apt-get install -y libsndfile1-dev
+RUN apt-get update && \
+    apt-get install -y \
+        libsndfile1-dev \
+        sudo
+
 RUN pip install --upgrade pip
 RUN pip install seaborn keras
 RUN pip install pysoundfile
 
 # User
 RUN echo ${user}
-RUN groupadd --gid 1000 ${user}
-RUN useradd -u 1000 -g 1000 -G sudo -s /bin/bash -d /home/${user} -m ${user}
+RUN addgroup --gid ${user_gid} ${user_grp}
+RUN useradd -u ${user_id} -g ${user_gid} -G sudo -s /bin/bash -d /home/${user} -m ${user}
 
 RUN echo ${user}:${pass} | chpasswd
 RUN echo 'Defaults visiblepw' >> /etc/sudoers
