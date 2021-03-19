@@ -29,9 +29,10 @@ RUN apt-get update && \
         libsndfile1-dev \
         sudo
 
+RUN pip install --upgrade pip
+
 RUN /opt/tensorrt/python/python_setup.sh
 
-RUN pip install --upgrade pip
 RUN pip install requests
 RUN pip install matplotlib
 RUN pip install seaborn keras
