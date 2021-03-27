@@ -9,9 +9,7 @@ fi
 
 function tf() {
     docker run --runtime=nvidia \
-       -v /etc/group:/etc/group:ro \
-	   -v /etc/passwd:/etc/passwd:ro \
-	   -v $HOME/Github:$HOME/Github -e "HOME=$HOME" -e "GRANT_SUDO=yes"\
+	   -v $HOME/Github:$HOME/Github -e "GRANT_SUDO=yes"\
 	   $USER_OPT $USER_PARAM \
 	   --rm \
 	   -it \

@@ -9,21 +9,18 @@ fi
 
 # https://docs.nvidia.com/deeplearning/sdk/tensorrt-container-release-notes/running.html
 # do following once
-#docker pull nvcr.io/nvidia/tensorflow:19.03-py3
+#docker pull nvcr.io/nvidia/tensorflow:20.06-py3
 # then
-#nvidia-docker run -it --rm nvcr.io/nvidia/tensorrt:19.03-py3
+#nvidia-docker run -it --rm nvcr.io/nvidia/tensorrt:20.06-py3
 
 function tfrt() {
-    nvidia-docker run \
-	   -v `realpath ~/Github`:/notebooks/Github \
-	   -v /etc/group:/etc/group:ro \
-	   -v /etc/passwd:/etc/passwd:ro \
-	   -v $HOME:$HOME -e "HOME=$HOME" \
+    docker run --runtime=nvidia \
+	   -v $HOME/Github:$HOME/Github -e "GRANT_SUDO=yes"\
 	   $USER_OPT $USER_PARAM \
-	   -it \
-	   -p 8888:8888 \
-	   -p 6006:6006 \
 	   --rm \
+	   -it \
+	   -p 8889:8888 \
+	   -p 6006:6006 \
 	   tensor-rt bash
 }
 
